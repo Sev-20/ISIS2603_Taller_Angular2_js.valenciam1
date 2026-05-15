@@ -4,21 +4,30 @@
   </div>
   <div class="card-body">
 
-    <!-- TODO HU-03: Muestra un spinner mientras se carga el clima (usa la propiedad loading) -->
+   
+    @if (loading) {
+      <div class="text-center my-2">
+        <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+        <span class="ms-2">Cargando clima...</span>
+      </div>
+    }
 
-    <!-- TODO HU-03: Muestra los datos de clima cuando estén disponibles:
-    - Temperatura: weatherDetail.temp_c °C
-    - Condición: weatherDetail.condition
-    - Humedad: weatherDetail.humidity %
-    -->
+   
+    @if (!loading && weatherDetail) {
+      <p class="mb-1">🌡️ Temperatura: <strong>{{ weatherDetail.temp_c }} °C</strong></p>
+      <p class="mb-1">🌤️ Condición: <strong>{{ weatherDetail.condition }}</strong></p>
+      <p class="mb-0">💧 Humedad: <strong>{{ weatherDetail.humidity }}%</strong></p>
+    }
 
-    <!-- TODO HU-03: Muestra un mensaje "No hay datos de clima disponibles" cuando no haya datos -->
-
-    <p class="text-muted mb-0">Clima no disponible.</p>
+    
+    @if (!loading && !weatherDetail) {
+      <p class="text-muted mb-0">No hay datos de clima disponibles.</p>
+    }
 
   </div>
 </div>
 
+<!-- El resto del HTML (historial) queda igual que tenías -->
 <div class="card mt-3">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">Historial de Clima</h5>
